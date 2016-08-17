@@ -1,0 +1,30 @@
+.page1 {
+    #localVideo {
+        width: 10rem !important;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+    }
+
+    #optionsButton {
+        position: absolute;
+        z-index: 9999;
+    }
+
+    #text {
+        text-align: center;
+        margin-top: 20rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+
+    video {
+        width: 100
+    }
+}
+
+#userImage {
+    border-radius: 50%;
+    width: 4rem;
+}
