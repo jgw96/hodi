@@ -9186,11 +9186,11 @@ body {
   background-color: #fff; }
 
 .page1 #localVideo {
-  width: 10rem !important;
-  border-radius: 50%;
+  width: 10rem;
+  border-radius: 5px;
   position: absolute;
-  bottom: 16px;
-  left: 16px; }
+  bottom: 5px;
+  left: 7px; }
 
 .page1 #optionsButton {
   position: absolute;
@@ -9201,9 +9201,6 @@ body {
   margin-top: 20rem;
   margin-left: 4rem;
   margin-right: 4rem; }
-
-.page1 video {
-  width: 100; }
 
 #userImage {
   border-radius: 50%;
