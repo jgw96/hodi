@@ -19,17 +19,16 @@ export class LoginPage {
   constructor(
     private navCtrl: NavController,
     private af: AngularFire,
-    private toastCtrl: ToastController) {
-
-  }
+    private toastCtrl: ToastController) {}
 
   ionViewDidEnter() {
     this.af.auth.subscribe(
       auth => {
-        console.log(auth);
         sessionStorage.setItem('userPic', auth.auth.photoURL);
         sessionStorage.setItem('userEmail', auth.auth.email);
-        this.navCtrl.setRoot(Page1);
+        this.navCtrl.setRoot(Page1, {}, {
+          animate: true
+        });
       },
       err => {
         let toast = this.toastCtrl.create({

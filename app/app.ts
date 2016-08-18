@@ -1,5 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
+import { Component, enableProdMode } from '@angular/core';
+import { ionicBootstrap, Platform } from 'ionic-angular';
+
+enableProdMode();
 
 import {
   FIREBASE_PROVIDERS,
@@ -8,8 +10,6 @@ import {
   AuthProviders,
   AuthMethods } from 'angularfire2';
 
-import { Page1 } from './pages/page1/page1';
-import { Page2 } from './pages/page2/page2';
 import { LoginPage } from './pages/login/login';
 
 @Component({
@@ -32,7 +32,6 @@ class MyApp {
 
 ionicBootstrap(MyApp, [
   FIREBASE_PROVIDERS,
-  // Initialize Firebase app  
   defaultFirebase({
     apiKey: 'AIzaSyB_r5i2UeGtPIA-K7OljYRod8Gwn2eYs9g',
     authDomain: 'trio-b3927.firebaseapp.com',

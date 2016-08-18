@@ -4,6 +4,7 @@ import { NavController, AlertController, ToastController, ActionSheetController 
 import { AngularFire } from 'angularfire2';
 import { LoginPage } from '../login/login';
 
+// ughh
 declare var SimpleWebRTC: any;
 
 @Component({
@@ -24,8 +25,7 @@ export class Page1 {
     private alertCtrl: AlertController,
     private af: AngularFire,
     private toastCtrl: ToastController,
-    private actionCtrl: ActionSheetController) {
-  }
+    private actionCtrl: ActionSheetController) {}
 
   ionViewDidEnter() {
     this.userPic = sessionStorage.getItem('userPic');
@@ -34,11 +34,8 @@ export class Page1 {
     this.inCall = false;
 
     this.webRTC = new SimpleWebRTC({
-      // the id/element dom element that will hold "our" video
       localVideoEl: this.localVideo.nativeElement,
-      // the id/element dom element that will hold remote videos
       remoteVideosEl: this.remoteVideo.nativeElement,
-      // immediately ask for camera access
       autoRequestMedia: true
     });
 
@@ -57,7 +54,8 @@ export class Page1 {
               toast.present();
               break;
             case 'connected':
-            case 'completed': // on caller side
+            case 'completed':
+            navigator.vibrate(500);
               let connectedToast = this.toastCtrl.create({
                 message: 'Connected!',
                 duration: 2000
@@ -66,6 +64,7 @@ export class Page1 {
               this.inCall = true;
               break;
             case 'disconnected':
+            navigator.vibrate(500);
               let disconnectedToast = this.toastCtrl.create({
                 message: 'Disconnected',
                 duration: 2000
@@ -94,6 +93,7 @@ export class Page1 {
     });
 
     this.webRTC.on('mute', () => {
+      navigator.vibrate(500);
       let toast = this.toastCtrl.create({
         message: 'The other user has paused their video',
         duration: 2000
@@ -160,9 +160,11 @@ export class Page1 {
           text: 'mute/unmute audio',
           handler: () => {
             if (this.audioState === 'unmuted') {
+              navigator.vibrate(500);
               this.webRTC.mute();
               this.audioState = 'muted';
             } else {
+              navigator.vibrate(500);
               this.webRTC.unmute();
               this.audioState = 'unmuted';
             }
@@ -172,9 +174,11 @@ export class Page1 {
           text: 'resume/pause video',
           handler: () => {
             if (this.videoState === 'playing') {
+              navigator.vibrate(500);
               this.webRTC.pauseVideo();
               this.videoState = 'paused';
             } else {
+              navigator.vibrate(500);
               this.webRTC.resumeVideo();
               this.videoState = 'playing';
             }

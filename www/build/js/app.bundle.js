@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+core_1.enableProdMode();
 var angularfire2_1 = require('angularfire2');
 var login_1 = require('./pages/login/login');
 var MyApp = (function () {
@@ -33,7 +34,6 @@ var MyApp = (function () {
 }());
 ionic_angular_1.ionicBootstrap(MyApp, [
     angularfire2_1.FIREBASE_PROVIDERS,
-    // Initialize Firebase app  
     angularfire2_1.defaultFirebase({
         apiKey: 'AIzaSyB_r5i2UeGtPIA-K7OljYRod8Gwn2eYs9g',
         authDomain: 'trio-b3927.firebaseapp.com',
@@ -79,7 +79,9 @@ var LoginPage = (function () {
             console.log(auth);
             sessionStorage.setItem('userPic', auth.auth.photoURL);
             sessionStorage.setItem('userEmail', auth.auth.email);
-            _this.navCtrl.setRoot(page1_1.Page1);
+            _this.navCtrl.setRoot(page1_1.Page1, {}, {
+                animate: true
+            });
         }, function (err) {
             var toast = _this.toastCtrl.create({
                 message: 'There was an error logging in, please try again',
@@ -131,11 +133,8 @@ var Page1 = (function () {
         this.videoState = 'playing';
         this.inCall = false;
         this.webRTC = new SimpleWebRTC({
-            // the id/element dom element that will hold "our" video
             localVideoEl: this.localVideo.nativeElement,
-            // the id/element dom element that will hold remote videos
             remoteVideosEl: this.remoteVideo.nativeElement,
-            // immediately ask for camera access
             autoRequestMedia: true
         });
         this.webRTC.joinRoom(sessionStorage.getItem('userEmail'));
