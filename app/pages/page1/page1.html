@@ -16,7 +16,7 @@
   <h1 id="text" *ngIf="!inCall">Not currently in a call. Tell your friend to call your gmail to start a call.</h1>
 
   <video id="localVideo" #local></video>
-  <div #remote></div>
+  <div id="remote" #remote></div>
 
   <button (click)="call()" primary fab fab-bottom fab-right>
     <ion-icon name="call"></ion-icon>

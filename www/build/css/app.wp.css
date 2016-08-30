@@ -9202,6 +9202,10 @@ body {
   margin-left: 4rem;
   margin-right: 4rem; }
 
+.page1 #remote {
+  width: 100%;
+  text-align: center; }
+
 #userImage {
   border-radius: 50%;
   width: 4rem; }

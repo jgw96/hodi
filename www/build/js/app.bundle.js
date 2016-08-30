@@ -68,19 +68,25 @@ var page1_1 = require('../page1/page1');
   Ionic pages and navigation.
 */
 var LoginPage = (function () {
-    function LoginPage(navCtrl, af, toastCtrl) {
+    function LoginPage(navCtrl, af, toastCtrl, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.af = af;
         this.toastCtrl = toastCtrl;
+        this.loadingCtrl = loadingCtrl;
     }
     LoginPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.af.auth.subscribe(function (auth) {
-            console.log(auth);
+            var loading = _this.loadingCtrl.create({
+                content: 'Authenticating...'
+            });
+            loading.present();
             sessionStorage.setItem('userPic', auth.auth.photoURL);
             sessionStorage.setItem('userEmail', auth.auth.email);
             _this.navCtrl.setRoot(page1_1.Page1, {}, {
                 animate: true
+            }).then(function () {
+                loading.dismiss();
             });
         }, function (err) {
             var toast = _this.toastCtrl.create({
@@ -97,7 +103,7 @@ var LoginPage = (function () {
         core_1.Component({
             templateUrl: 'build/pages/login/login.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, angularfire2_1.AngularFire, ionic_angular_1.ToastController])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, angularfire2_1.AngularFire, ionic_angular_1.ToastController, ionic_angular_1.LoadingController])
     ], LoginPage);
     return LoginPage;
 }());
@@ -152,6 +158,7 @@ var Page1 = (function () {
                             break;
                         case 'connected':
                         case 'completed':
+                            navigator.vibrate(500);
                             var connectedToast = _this.toastCtrl.create({
                                 message: 'Connected!',
                                 duration: 2000
@@ -160,6 +167,7 @@ var Page1 = (function () {
                             _this.inCall = true;
                             break;
                         case 'disconnected':
+                            navigator.vibrate(500);
                             var disconnectedToast = _this.toastCtrl.create({
                                 message: 'Disconnected',
                                 duration: 2000
@@ -187,6 +195,7 @@ var Page1 = (function () {
             }
         });
         this.webRTC.on('mute', function () {
+            navigator.vibrate(500);
             var toast = _this.toastCtrl.create({
                 message: 'The other user has paused their video',
                 duration: 2000
@@ -253,10 +262,12 @@ var Page1 = (function () {
                     text: 'mute/unmute audio',
                     handler: function () {
                         if (_this.audioState === 'unmuted') {
+                            navigator.vibrate(500);
                             _this.webRTC.mute();
                             _this.audioState = 'muted';
                         }
                         else {
+                            navigator.vibrate(500);
                             _this.webRTC.unmute();
                             _this.audioState = 'unmuted';
                         }
@@ -266,10 +277,12 @@ var Page1 = (function () {
                     text: 'resume/pause video',
                     handler: function () {
                         if (_this.videoState === 'playing') {
+                            navigator.vibrate(500);
                             _this.webRTC.pauseVideo();
                             _this.videoState = 'paused';
                         }
                         else {
+                            navigator.vibrate(500);
                             _this.webRTC.resumeVideo();
                             _this.videoState = 'playing';
                         }
